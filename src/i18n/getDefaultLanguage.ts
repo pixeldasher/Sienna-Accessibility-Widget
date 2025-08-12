@@ -1,11 +1,11 @@
 import { getScriptDataAttribute } from "../utils/getScriptDataAttribute";
 
 export function getDefaultLanguage() {
-    const language = 
-        getScriptDataAttribute("lang") ||
-        document.documentElement?.lang ||
-        navigator?.language ||
-        document.querySelector('meta[http-equiv="Content-Language"]')?.content
+	const language =
+		getScriptDataAttribute("lang") ||
+		document.documentElement?.lang ||
+		navigator?.language ||
+		document.querySelector<HTMLMetaElement|null>('meta[http-equiv="Content-Language"]')?.content;
 
-    return language?.split(/[-_]/)?.[0]?.trim() || "en";
+	return language?.split(/[-_]/)?.[0]?.trim() || "en";
 }

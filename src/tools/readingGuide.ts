@@ -1,34 +1,48 @@
-import template from "./readingGuide.html";
 import css from "./readingGuide.css";
+/** @ts-ignore HTML Import */
+import template from "./readingGuide.html";
 
-export default function readingGuide(enable=false) {
-    let guide = document.querySelector('.asw-rg-container');
+declare global {
+	interface Window {
+		__asw__onScrollReadableGuide: EventListener;
+	}
+}
 
-    if(enable) {
-        if(!guide) {
-            guide = document.createElement("div");
-            guide.classList.add('asw-rg-container');
-            guide.innerHTML = `<style>${css}</style>${template}`;
+export default function readingGuide(enable = false) {
+	let guide = document.querySelector(".asw-rg-container");
 
-            const rgTop: HTMLElement = guide.querySelector('.asw-rg-top');
-            const rgBottom: HTMLElement = guide.querySelector('.asw-rg-bottom');
-            const margin = 20;
+	if (enable) {
+		if (!guide) {
+			guide = document.createElement("div");
+			guide.classList.add("asw-rg-container");
+			guide.innerHTML = `<style>${css}</style>${template}`;
 
-            (window as any).__asw__onScrollReadableGuide = (event) => {
-                rgTop.style.height = `${event.clientY - margin}px`;
-                rgBottom.style.height = `${window.innerHeight - event.clientY - (margin * 2)}px`;
-            }
+			const rgTop: HTMLElement = guide.querySelector(".asw-rg-top");
+			const rgBottom: HTMLElement = guide.querySelector(".asw-rg-bottom");
+			const margin = 20;
 
-            document.addEventListener('mousemove', (window as any).__asw__onScrollReadableGuide, { passive: false });
-            
-            document.body.appendChild(guide);
-        }
-    } else {
-        guide?.remove();
+			window.__asw__onScrollReadableGuide = (event: MouseEvent) => {
+				rgTop.style.height = `${event.clientY - margin}px`;
+				rgBottom.style.height = `${window.innerHeight - event.clientY - margin * 2}px`;
+			};
 
-        if((window as any).__asw__onScrollReadableGuide) {
-            document.removeEventListener('mousemove', (window as any).__asw__onScrollReadableGuide);
-            delete (window as any).__asw__onScrollReadableGuide;
-        }
-    }
+			document.addEventListener(
+				"mousemove",
+				window.__asw__onScrollReadableGuide,
+				{ passive: false },
+			);
+
+			document.body.appendChild(guide);
+		}
+	} else {
+		guide?.remove();
+
+		if (window.__asw__onScrollReadableGuide) {
+			document.removeEventListener(
+				"mousemove",
+				window.__asw__onScrollReadableGuide,
+			);
+			delete window.__asw__onScrollReadableGuide;
+		}
+	}
 }

@@ -1,24 +1,25 @@
 {
-  "name": "sienna-accessibility",
-  "version": "2.0.0",
-  "description": "Sienna: Accessibility Website Widget",
-  "main": "./src/entry.ts",
-  "scripts": {
-    "watch": "node esbuild.config.js --watch",
-    "build": "node esbuild.config.js --minify"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bennyluk/Sienna-Accessibility-Widget.git"
-  },
-  "author": "Benny Luk",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bennyluk/Sienna-Accessibility-Widget/issues"
-  },
-  "homepage": "https://accessibility-widget.pages.dev/",
-  "devDependencies": {
-    "esbuild": "0.25.1",
-    "html-minifier": "^4.0.0"
-  }
+	"name": "sienna-accessibility",
+	"version": "2.1.0",
+  "type": "module",
+	"description": "Sienna: Accessibility Website Widget",
+	"main": "./src/entry.ts",
+	"scripts": {
+		"watch": "node esbuild.config.js --watch",
+		"build": "node esbuild.config.js --minify"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bennyluk/Sienna-Accessibility-Widget.git"
+	},
+	"author": "Benny Luk",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/bennyluk/Sienna-Accessibility-Widget/issues"
+	},
+	"homepage": "https://accessibility-widget.pages.dev/",
+	"devDependencies": {
+		"esbuild": "0.25.8",
+		"html-minifier": "^4.0.0"
+	}
 }

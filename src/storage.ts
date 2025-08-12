@@ -1,27 +1,27 @@
 import { getCookie, setCookie } from "./utils/cookies";
 
-export function saveStorageData(key, value) {
-    const jsonValue = JSON.stringify(value);
+export function saveStorageData(key: string, value: number|string|object) {
+	const jsonValue = JSON.stringify(value);
 
-    try {
-        localStorage.setItem(key, jsonValue);
-    } catch (e) {
-        setCookie(key, jsonValue);
-    }
+	try {
+		localStorage.setItem(key, jsonValue);
+	} catch (_e) {
+		setCookie(key, jsonValue);
+	}
 }
 
-export function getStorageData(key) {
-    let data;
+export function getStorageData(key: string) {
+	let data = "";
 
-    try {
-        data = localStorage.getItem(key);
-    } catch (e) {
-        data = getCookie(key);
-    }
+	try {
+		data = localStorage.getItem(key);
+	} catch (_e) {
+		data = getCookie(key);
+	}
 
-    try {
-        return JSON.parse(data);
-    } catch (e) {
-        return {};
-    }
+	try {
+		return JSON.parse(data);
+	} catch (_e) {
+		return {};
+	}
 }
