@@ -88,7 +88,7 @@ export default function renderMenu() {
 	// *** Controls ***
 	$menu.querySelectorAll(".asw-plus, .asw-minus").forEach((el: HTMLElement) => {
 		el.addEventListener("click", () => {
-			const difference = 0.1;
+			const difference = 0.2;
 
 			let fontSize = userSettings?.states?.fontSize || 1;
 			if (el.classList.contains("asw-minus")) {
@@ -97,9 +97,9 @@ export default function renderMenu() {
 				fontSize += difference;
 			}
 
-			fontSize = Math.max(fontSize, 0.1);
+			fontSize = Math.max(fontSize, 0.2);
 			fontSize = Math.min(fontSize, 2);
-			fontSize = Number(fontSize.toFixed(2));
+			fontSize = Math.round(fontSize * 100) / 100;
 
 			document.querySelector(".asw-amount").textContent =
 				`${(fontSize * 100).toFixed(0)}%`;

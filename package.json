@@ -1,7 +1,7 @@
 {
 	"name": "sienna-accessibility",
 	"version": "2.1.0",
-  "type": "module",
+	"type": "module",
 	"description": "Sienna: Accessibility Website Widget",
 	"main": "./src/entry.ts",
 	"scripts": {
@@ -20,6 +20,6 @@
 	"homepage": "https://accessibility-widget.pages.dev/",
 	"devDependencies": {
 		"esbuild": "0.25.8",
-		"html-minifier": "^4.0.0"
+		"html-minifier-next": "^1.1.5"
 	}
 }

@@ -11,14 +11,25 @@ export default function adjustFontSize(multiply: number = 1) {
 			return;
 		}
 
-		// Get the original font size
-		el.style.removeProperty("font-size");
-		requestAnimationFrame(() => {
-			const fontSize = parseInt(window.getComputedStyle(el).fontSize);
+		if (multiply === 1) {
+			el.style.removeProperty("font-size");
+			if (el.style.length === 0) delete el.style;
+		} else {
+			requestAnimationFrame(() => {
+				// Get the original font size
+				const orgFontSize =
+					Number(el.dataset.aswOrgFontSize) ||
+					parseInt(window.getComputedStyle(el).fontSize);
 
-			// Calculate and apply new font size
-			const newFontSize = fontSize * multiply;
-			el.style.setProperty("font-size", `${newFontSize}px`);
-		});
+				// If no font size stored in data, set it now
+				if (!el.dataset.aswOrgFontSize) {
+					el.dataset.aswOrgFontSize = String(orgFontSize);
+				}
+
+				// Calculate and apply new font size
+				const newFontSize = orgFontSize * multiply;
+				el.style.setProperty("font-size", `${newFontSize}px`);
+			});
+		}
 	});
 }

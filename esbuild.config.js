@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
 import { context, transform } from "esbuild";
-import { minify } from "html-minifier";
+import { minify } from "html-minifier-next";
+import { readFileSync } from "node:fs";
 
 async function build() {
 	const isWatch = process.argv.includes("--watch");
@@ -38,11 +38,11 @@ async function build() {
 				setup(build) {
 					build.onLoad({ filter: /\.(html|svg)$/ }, async (args) => {
 						const file = readFileSync(args.path, "utf8");
-						var html = minify(file, {
+						var html = (await minify(file, {
 							removeComments: true,
 							removeEmptyAttributes: true,
 							collapseWhitespace: true,
-						}).trim();
+						})).trim();
 
 						return { loader: "text", contents: html };
 					});
