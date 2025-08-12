@@ -2,8 +2,6 @@ import { readFileSync } from "node:fs";
 import { context, transform } from "esbuild";
 import { minify } from "html-minifier";
 
-const packageJson = JSON.parse(readFileSync("./package.json", "utf8"));
-
 async function build() {
 	const isWatch = process.argv.includes("--watch");
 	const isMinify = process.argv.includes("--minify");
@@ -51,15 +49,6 @@ async function build() {
 				},
 			},
 		],
-		banner: {
-			js: `/*!
-      * Sienna Accessibility Widget v${packageJson.version}
-      * (c) ${new Date().getFullYear()} ${packageJson.author}
-      * License: ${packageJson.license}
-      * Home Page: ${packageJson.homepage}
-      * Repository: ${packageJson.repository.url}
-      */`,
-		},
 	});
 
 	if (isWatch) {

@@ -13,8 +13,21 @@ export default function sienna({ options }) {
 	runAccessibility();
 	renderWidget();
 
-	const callback: ResizeObserverCallback = () => runAccessibility();
-	const observer = new ResizeObserver(callback);
+	let previousInlineSize = 0;
+	const observer = new ResizeObserver(([entry]) => {
+		const inlineSize = entry.borderBoxSize.at(0).inlineSize;
+
+		if (typeof inlineSize === "number" && inlineSize !== previousInlineSize) {
+			previousInlineSize = inlineSize;
+			const states = userSettings.states;
+
+			userSettings.states = {};
+			runAccessibility();
+
+			userSettings.states = states;
+			runAccessibility();
+		}
+	});
 	observer.observe(document.documentElement);
 
 	return {

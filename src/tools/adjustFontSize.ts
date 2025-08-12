@@ -12,17 +12,13 @@ export default function adjustFontSize(multiply: number = 1) {
 		}
 
 		// Get the original font size
-		const orgFontSize =
-			Number(el.dataset.aswOrgFontSize) ||
-			parseInt(window.getComputedStyle(el).fontSize);
+		el.style.removeProperty("font-size");
+		requestAnimationFrame(() => {
+			const fontSize = parseInt(window.getComputedStyle(el).fontSize);
 
-		// If no font size stored in data, set it now
-		if (!el.dataset.aswOrgFontSize) {
-			el.dataset.aswOrgFontSize = String(orgFontSize);
-		}
-
-		// Calculate and apply new font size
-		const newFontSize = orgFontSize * multiply;
-		el.style.fontSize = `${newFontSize}px`;
+			// Calculate and apply new font size
+			const newFontSize = fontSize * multiply;
+			el.style.setProperty("font-size", `${newFontSize}px`);
+		});
 	});
 }
